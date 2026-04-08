@@ -16,28 +16,28 @@
 /* ───── RESET & VARS ───── */
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#07071a;--card:#111130;--accent:#ff3068;--gold:#ffe156;--cyan:#00e5ff;
-  --text:#f0f0f0;--muted:#6a6a8e;--border:rgba(255,255,255,.06);--radius:16px;
+  --bg:#fefcf3;--card:#ffffff;--accent:#e8577a;--gold:#d64a7a;--cyan:#e8577a;
+  --text:#5c3d2e;--muted:rgba(92,61,46,.45);--border:rgba(0,0,0,.07);--radius:16px;
 }
 html{overflow-x:hidden}
-body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;min-height:100dvh}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(255,48,104,.07),transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(0,229,255,.05),transparent 50%);pointer-events:none}
+body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(180deg,#fefcf3,#fff7ed,#fef3f0);color:var(--text);min-height:100vh;min-height:100dvh}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 80%,rgba(232,87,122,.06),transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(255,200,180,.1),transparent 50%);pointer-events:none}
 
 /* ───── COMPONENTS ───── */
 .wrap{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:16px 16px 80px}
 .logo{text-align:center;padding:24px 0 8px}
-.logo h1{font-family:'Black Han Sans',sans-serif;font-size:clamp(1.8rem,5vw,3rem);
-  background:linear-gradient(135deg,var(--accent),var(--gold),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.logo h1{font-size:clamp(1.6rem,5vw,2.2rem);color:var(--text);letter-spacing:2px;font-weight:400;font-family:sans-serif}
+.logo h1 b{font-weight:700;color:#e8577a}
 .logo p{color:var(--muted);font-size:.88rem}
 
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;position:relative;overflow:hidden;margin-bottom:16px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;position:relative;overflow:hidden;margin-bottom:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
 .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold))}
 .card.cyan::before{background:linear-gradient(90deg,var(--cyan),var(--gold))}
 .card h2{font-size:.95rem;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 
-input[type=text],input[type=password],select{font-family:inherit;font-size:.9rem;background:rgba(255,255,255,.06);color:var(--text);
+input[type=text],input[type=password],select{font-family:inherit;font-size:.9rem;background:#fef8f4;color:var(--text);
   border:1px solid var(--border);border-radius:10px;padding:10px 14px;outline:none;width:100%;transition:.2s}
-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,48,104,.12)}
+input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(232,87,122,.1)}
 
 .row{display:flex;gap:8px;margin-bottom:10px}
 .row input,.row select{flex:1}
@@ -45,19 +45,19 @@ input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,48,104,.12)
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-family:inherit;font-size:.88rem;font-weight:700;
   border:none;border-radius:12px;padding:10px 20px;cursor:pointer;transition:all .15s;color:#fff;white-space:nowrap}
 .btn:active{transform:scale(.96)}
-.btn-primary{background:linear-gradient(135deg,var(--accent),#d62856);box-shadow:0 4px 20px rgba(255,48,104,.3)}
-.btn-gold{background:linear-gradient(135deg,var(--gold),#ffb347);color:#1a1200;box-shadow:0 4px 20px rgba(255,225,86,.2)}
-.btn-ghost{background:rgba(255,255,255,.06);color:var(--muted)}
+.btn-primary{background:linear-gradient(135deg,var(--accent),#d64a6a);box-shadow:0 4px 16px rgba(232,87,122,.25)}
+.btn-gold{background:linear-gradient(135deg,#e8577a,#d64a6a);color:#fff;box-shadow:0 4px 16px rgba(232,87,122,.2)}
+.btn-ghost{background:rgba(0,0,0,.04);color:var(--muted)}
 .btn:disabled{opacity:.35;cursor:not-allowed;transform:none}
 .btn-sm{padding:5px 12px;font-size:.75rem;border-radius:8px}
 .btn-big{font-family:'Black Han Sans',sans-serif;font-size:clamp(1.1rem,3vw,1.5rem);padding:16px 48px;border-radius:60px;
-  box-shadow:0 8px 32px rgba(255,48,104,.35)}
+  box-shadow:0 8px 32px rgba(232,87,122,.25)}
 
 .tags{display:flex;flex-wrap:wrap;gap:5px;min-height:32px}
-.tag{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.06);border:1px solid var(--border);
+.tag{display:inline-flex;align-items:center;gap:5px;background:rgba(232,87,122,.06);border:1px solid rgba(232,87,122,.12);
   padding:5px 11px;border-radius:20px;font-size:.8rem;animation:pop .25s ease}
-.tag.won{border-color:rgba(255,225,86,.3);background:rgba(255,225,86,.1);color:var(--gold)}
-.tag .n{background:rgba(255,255,255,.1);border-radius:50%;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700}
+.tag.won{border-color:rgba(232,87,122,.3);background:rgba(232,87,122,.12);color:#c4405f}
+.tag .n{background:rgba(232,87,122,.1);border-radius:50%;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700}
 .tag .x{cursor:pointer;color:var(--muted);margin-left:2px;font-size:.7rem}
 .tag .x:hover{color:var(--accent)}
 
@@ -69,15 +69,15 @@ input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,48,104,.12)
 .r1{background:linear-gradient(135deg,#ffd700,#ffaa00);color:#1a1a00}
 .r2{background:linear-gradient(135deg,#c0c0c0,#999);color:#1a1a1a}
 .r3{background:linear-gradient(135deg,#cd7f32,#a06);color:#fff}
-.rn{background:rgba(255,255,255,.1);color:var(--muted)}
+.rn{background:rgba(0,0,0,.06);color:var(--muted)}
 
 /* ───── DRAW ───── */
 .slot{font-family:'Black Han Sans',sans-serif;font-size:clamp(3.5rem,12vw,7rem);text-align:center;
-  color:var(--cyan);text-shadow:0 0 40px rgba(0,229,255,.3);height:clamp(80px,16vw,130px);
+  color:var(--accent);text-shadow:0 0 30px rgba(232,87,122,.15);height:clamp(80px,16vw,130px);
   display:flex;align-items:center;justify-content:center;letter-spacing:2px}
 .slot.spin{animation:glow .12s ease infinite alternate}
 .winner-msg{text-align:center;font-size:clamp(1rem,3vw,1.4rem);font-weight:900;padding:8px 0;
-  background:linear-gradient(135deg,var(--gold),#ffb347);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  color:var(--accent)}
 
 .history-item{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--card);border-radius:12px;
   margin-bottom:8px;border:1px solid var(--border);animation:slideUp .3s ease}
@@ -88,11 +88,11 @@ input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,48,104,.12)
 /* ───── MODE SELECT ───── */
 .mode-select{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:32px}
 .mode-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;
-  width:220px;text-align:center;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
-.mode-card:hover{border-color:rgba(255,255,255,.15);transform:translateY(-2px)}
+  width:220px;text-align:center;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.mode-card:hover{border-color:rgba(232,87,122,.2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(232,87,122,.1)}
 .mode-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-.mode-card.part::before{background:linear-gradient(90deg,var(--cyan),var(--gold))}
-.mode-card.admin::before{background:linear-gradient(90deg,var(--gold),var(--accent))}
+.mode-card.part::before{background:linear-gradient(90deg,var(--accent),#f4a0b5)}
+.mode-card.admin::before{background:linear-gradient(90deg,#f4a0b5,var(--accent))}
 .mode-card .icon{font-size:2.8rem;margin-bottom:8px}
 .mode-card .label{font-weight:800;font-size:1.05rem;margin-bottom:4px}
 .mode-card .desc{color:var(--muted);font-size:.8rem}
@@ -100,7 +100,7 @@ input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,48,104,.12)
 .pin-area{margin-top:12px;display:flex;gap:6px}
 .pin-err{color:var(--accent);font-size:.76rem;margin-top:6px}
 
-.topbar{position:sticky;top:0;z-index:50;background:rgba(7,7,26,.88);backdrop-filter:blur(12px);
+.topbar{position:sticky;top:0;z-index:50;background:rgba(254,252,243,.92);backdrop-filter:blur(12px);
   border-bottom:1px solid var(--border);padding:8px 16px;display:flex;justify-content:space-between;align-items:center}
 .topbar span{font-size:.8rem;color:var(--muted)}
 
@@ -111,7 +111,7 @@ input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,48,104,.12)
 .registered-box .check{font-size:2.2rem;margin-bottom:4px}
 .registered-box .rname{font-weight:800;font-size:1.1rem}
 .registered-box .rnum{color:var(--cyan);font-weight:700;font-size:1.1rem}
-.win-box{margin-top:14px;padding:12px 16px;border-radius:12px;background:rgba(255,225,86,.1);border:1px solid rgba(255,225,86,.2);text-align:center}
+.win-box{margin-top:14px;padding:12px 16px;border-radius:12px;background:rgba(232,87,122,.08);border:1px solid rgba(232,87,122,.15);text-align:center}
 
 /* ───── CONFETTI ───── */
 .confetti-box{position:fixed;inset:0;pointer-events:none;z-index:999;overflow:hidden}
@@ -119,13 +119,12 @@ input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,48,104,.12)
 
 /* ───── WINNER CELEBRATION OVERLAY ───── */
 .celebrate-overlay{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;
-  background:rgba(7,7,26,.92);backdrop-filter:blur(16px);animation:fadeIn .4s ease;cursor:pointer}
+  background:rgba(255,255,255,.92);backdrop-filter:blur(16px);animation:fadeIn .4s ease;cursor:pointer}
 .celebrate-inner{text-align:center;animation:celebPop .6s cubic-bezier(.17,.67,.29,1.4)}
 .celebrate-inner .trophy{font-size:5rem;animation:bounce 1s ease infinite}
 .celebrate-inner .congrats{font-family:'Black Han Sans',sans-serif;font-size:clamp(2rem,7vw,3.5rem);
-  background:linear-gradient(135deg,var(--gold),#ffb347,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  margin:12px 0}
-.celebrate-inner .prize-label{font-size:clamp(1rem,3vw,1.4rem);color:var(--cyan);font-weight:700;margin:8px 0 20px}
+  color:#e8577a;margin:12px 0}
+.celebrate-inner .prize-label{font-size:clamp(1rem,3vw,1.4rem);color:#5c3d2e;font-weight:700;margin:8px 0 20px}
 .celebrate-inner .dismiss{color:var(--muted);font-size:.8rem;margin-top:24px;animation:pulse 2s ease infinite}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes celebPop{from{transform:scale(.3) rotate(-5deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
@@ -135,14 +134,14 @@ input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,48,104,.12)
 /* ───── SETUP PAGE ───── */
 .setup{max-width:520px;margin:60px auto;padding:20px;text-align:center}
 .setup h2{color:var(--accent);margin-bottom:12px}
-.setup textarea{width:100%;height:200px;background:rgba(255,255,255,.06);color:var(--cyan);border:1px solid var(--border);
+.setup textarea{width:100%;height:200px;background:#fef8f4;color:var(--accent);border:1px solid var(--border);
   border-radius:10px;padding:14px;font-family:'Courier New',monospace;font-size:.82rem;outline:none;resize:vertical}
 .setup .hint{color:var(--muted);font-size:.78rem;margin:10px 0;line-height:1.6;text-align:left}
 
 /* ───── ANIMS ───── */
 @keyframes pop{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
 @keyframes slideUp{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}
-@keyframes glow{from{text-shadow:0 0 30px rgba(0,229,255,.3)}to{text-shadow:0 0 60px rgba(0,229,255,.6),0 0 100px rgba(255,48,104,.2)}}
+@keyframes glow{from{text-shadow:0 0 20px rgba(232,87,122,.2)}to{text-shadow:0 0 40px rgba(232,87,122,.35)}}
 @keyframes fall{0%{transform:translateY(0) rotate(0) scale(1);opacity:1}100%{transform:translateY(100vh) rotate(720deg) scale(.4);opacity:0}}
 </style>
 </head>
@@ -215,7 +214,7 @@ async function saveWinners(arr) { await db.ref("raffle/winners").set(arr.length 
 // ───── Confetti ─────
 function fireConfetti() {
   const box = document.getElementById("confettiBox");
-  const colors = ["#ff3068","#ffe156","#00e5ff","#a855f7","#34d399","#fb923c"];
+  const colors = ["#e8577a","#f4a0b5","#ffb7c5","#ffc4d4","#ff9bb5","#f8d7da"];
   for (let i = 0; i < 70; i++) {
     const c = document.createElement("div");
     c.className = "conf";
@@ -269,14 +268,14 @@ function renderSetup() {
     <div class="hint">
       <strong style="color:var(--text)">📋 설정 방법:</strong><br><br>
       1️⃣ <a href="https://console.firebase.google.com" target="_blank" style="color:var(--cyan)">Firebase Console</a> 접속 → 프로젝트 만들기<br><br>
-      2️⃣ 좌측 메뉴 "Realtime Database" → 데이터베이스 만들기 → <strong style="color:var(--gold)">테스트 모드</strong>로 시작<br><br>
+      2️⃣ 좌측 메뉴 "Realtime Database" → 데이터베이스 만들기 → <strong style="color:var(--accent)">테스트 모드</strong>로 시작<br><br>
       3️⃣ 프로젝트 설정(⚙️) → 하단 "웹 앱 추가(&lt;/&gt;)" → 앱 등록<br><br>
       4️⃣ 표시되는 <code style="color:var(--cyan)">firebaseConfig</code> 값을 이 HTML 파일의<br>
          <code style="color:var(--accent)">FIREBASE_CONFIG</code> 부분에 붙여넣기<br><br>
       5️⃣ 파일을 GitHub Pages 등에 업로드하면 완료! 🎉
     </div>
-    <div style="margin-top:20px;padding:16px;background:rgba(255,225,86,.06);border:1px solid rgba(255,225,86,.15);border-radius:12px;text-align:left">
-      <div style="font-size:.82rem;color:var(--gold);font-weight:700;margin-bottom:6px">💡 무료 호스팅 (GitHub Pages)</div>
+    <div style="margin-top:20px;padding:16px;background:rgba(232,87,122,.05);border:1px solid rgba(232,87,122,.12);border-radius:12px;text-align:left">
+      <div style="font-size:.82rem;color:var(--accent);font-weight:700;margin-bottom:6px">💡 무료 호스팅 (GitHub Pages)</div>
       <div style="font-size:.78rem;color:var(--muted);line-height:1.6">
         1. GitHub에서 새 Repository 생성<br>
         2. 이 HTML 파일을 <code style="color:var(--cyan)">index.html</code>로 업로드<br>
@@ -291,8 +290,8 @@ function renderSetup() {
 function renderModeSelect() {
   return `<div class="wrap">
     <div class="logo">
-      <div style="font-size:3.5rem">🌸🌸🌸</div>
-      <h1>벚꽃마라톤 경품추첨</h1>
+      <div style="font-size:3.5rem">🌸</div>
+      <h1>🌸 <b>벚꽃마라톤</b> 경품추첨 🌸</h1>
       <p>입장 유형을 선택하세요</p>
     </div>
     <div class="mode-select">
@@ -348,7 +347,7 @@ function renderParticipant() {
         </div>
         ${myWin ? `<div class="win-box">
           <div style="font-size:1.5rem">🏆</div>
-          <div style="font-weight:800;color:var(--gold);font-size:1rem">축하합니다! 당첨!</div>
+          <div style="font-weight:800;color:var(--accent);font-size:1rem">축하합니다! 당첨!</div>
           <div style="font-size:.9rem;margin-top:4px">🎁 ${myWin.prize}</div>
         </div>` : ''}
       </div>
@@ -357,7 +356,7 @@ function renderParticipant() {
 
   return `<div class="topbar"><span>🙋 참가자</span><button class="btn btn-ghost btn-sm" onclick="mode=null;myName=null;render()">나가기</button></div>
   <div class="wrap" style="max-width:520px">
-    <div class="logo"><h1>🌸 벚꽃마라톤 경품추첨</h1></div>
+    <div class="logo"><h1>🌸 <b>벚꽃마라톤</b> 경품추첨 🌸</h1></div>
     ${regSection}
     <div class="card">
       <h2>👥 참가자 (${state.people.length}명)</h2>
@@ -399,7 +398,7 @@ function renderAdmin() {
 
   return `<div class="topbar"><span>👑 관리자</span><button class="btn btn-ghost btn-sm" onclick="mode=null;render()">나가기</button></div>
   <div class="wrap">
-    <div class="logo"><h1>🌸 벚꽃마라톤 관리자</h1><p>참가자와 경품을 관리하고 추첨을 진행하세요</p></div>
+    <div class="logo"><h1>🌸 <b>벚꽃마라톤</b> 관리자 🌸</h1><p>참가자와 경품을 관리하고 추첨을 진행하세요</p></div>
 
     <div class="grid2">
       <div class="card">
@@ -418,7 +417,8 @@ function renderAdmin() {
       <div class="card">
         <h2>🎁 경품 관리</h2>
         <div class="row">
-          <input type="text" id="prizeInput" placeholder="경품명 입력" onkeydown="if(event.key==='Enter')addPrize()">
+          <input type="text" id="prizeInput" placeholder="경품명 입력" onkeydown="if(event.key==='Enter')addPrize()" style="flex:3">
+          <input type="number" id="prizeQty" placeholder="수량" value="1" min="1" max="99" style="flex:1;min-width:60px;text-align:center">
           <button class="btn btn-primary" onclick="addPrize()">추가</button>
         </div>
         <div style="max-height:160px;overflow-y:auto">
@@ -428,7 +428,7 @@ function renderAdmin() {
               return `<div class="prize-row">
                 <span class="prize-rank ${rc}">${i+1}</span>
                 <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.name}</span>
-                ${p.winner ? `<span style="color:var(--gold);font-weight:700;font-size:.78rem">🏆 ${p.winner}</span>` : ''}
+                ${p.winner ? `<span style="color:var(--accent);font-weight:700;font-size:.78rem">🏆 ${p.winner}</span>` : ''}
                 <span class="x" style="cursor:pointer;color:var(--muted);font-size:.75rem" onclick="removePrize(${i})">✕</span>
               </div>`;
             }).join('')}
@@ -472,11 +472,18 @@ function renderAdmin() {
 
 async function addPrize() {
   const inp = document.getElementById("prizeInput");
+  const qtyInp = document.getElementById("prizeQty");
   const name = inp.value.trim();
   if (!name) return;
-  const updated = [...state.prizes, { name, winner: null }];
+  const qty = Math.max(1, Math.min(99, parseInt(qtyInp.value) || 1));
+  const newPrizes = [];
+  for (let i = 0; i < qty; i++) {
+    newPrizes.push({ name: qty > 1 ? `${name} (${i+1}/${qty})` : name, winner: null });
+  }
+  const updated = [...state.prizes, ...newPrizes];
   await savePrizes(updated);
   inp.value = "";
+  qtyInp.value = "1";
 }
 async function removePrize(i) {
   const updated = state.prizes.filter((_, idx) => idx !== i);
