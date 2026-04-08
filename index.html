@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>🎊 경품추첨</title>
+<title>🌸 벚꽃마라톤 경품추첨 🌸</title>
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
@@ -117,6 +117,21 @@ input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,48,104,.12)
 .confetti-box{position:fixed;inset:0;pointer-events:none;z-index:999;overflow:hidden}
 .conf{position:absolute;top:-20px;border-radius:2px;animation:fall linear forwards}
 
+/* ───── WINNER CELEBRATION OVERLAY ───── */
+.celebrate-overlay{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;
+  background:rgba(7,7,26,.92);backdrop-filter:blur(16px);animation:fadeIn .4s ease;cursor:pointer}
+.celebrate-inner{text-align:center;animation:celebPop .6s cubic-bezier(.17,.67,.29,1.4)}
+.celebrate-inner .trophy{font-size:5rem;animation:bounce 1s ease infinite}
+.celebrate-inner .congrats{font-family:'Black Han Sans',sans-serif;font-size:clamp(2rem,7vw,3.5rem);
+  background:linear-gradient(135deg,var(--gold),#ffb347,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin:12px 0}
+.celebrate-inner .prize-label{font-size:clamp(1rem,3vw,1.4rem);color:var(--cyan);font-weight:700;margin:8px 0 20px}
+.celebrate-inner .dismiss{color:var(--muted);font-size:.8rem;margin-top:24px;animation:pulse 2s ease infinite}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes celebPop{from{transform:scale(.3) rotate(-5deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+
 /* ───── SETUP PAGE ───── */
 .setup{max-width:520px;margin:60px auto;padding:20px;text-align:center}
 .setup h2{color:var(--accent);margin-bottom:12px}
@@ -135,6 +150,7 @@ input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,48,104,.12)
 
 <div id="app"></div>
 <div class="confetti-box" id="confettiBox"></div>
+<div id="celebOverlay"></div>
 
 <script>
 // ══════════════════════════════════════════════════════
@@ -171,10 +187,19 @@ function initFirebase() {
     // Listen for realtime changes
     db.ref("raffle").on("value", (snap) => {
       const d = snap.val() || {};
+      const oldWinnerCount = state.winners.length;
       state.people  = d.people  ? Object.values(d.people)  : [];
       state.prizes  = d.prizes  ? Object.values(d.prizes)  : [];
       state.winners = d.winners ? Object.values(d.winners) : [];
       render();
+      // 참가자 화면: 새 당첨자가 생기면 본인이면 풀화면 축하
+      if (mode === "participant" && state.winners.length > oldWinnerCount) {
+        const latest = state.winners[state.winners.length - 1];
+        if (latest && latest.name === myName) {
+          fireConfetti();
+          showCelebration(latest.name, latest.prize);
+        }
+      }
     });
     return true;
   } catch (e) {
@@ -204,6 +229,24 @@ function fireConfetti() {
     box.appendChild(c);
   }
   setTimeout(() => box.innerHTML = "", 4500);
+}
+
+function showCelebration(name, prize) {
+  const el = document.getElementById("celebOverlay");
+  el.innerHTML = `<div class="celebrate-overlay" onclick="closeCelebration()">
+    <div class="celebrate-inner">
+      <div class="trophy">🏆</div>
+      <div class="congrats">축하합니다!</div>
+      <div style="font-size:1.3rem;font-weight:800;margin:4px 0">${name}님 당첨!</div>
+      <div class="prize-label">🎁 ${prize}</div>
+      <div class="dismiss">화면을 터치하면 닫힙니다</div>
+    </div>
+  </div>`;
+  // 진동 지원되는 폰이면 진동도
+  if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 400]);
+}
+function closeCelebration() {
+  document.getElementById("celebOverlay").innerHTML = "";
 }
 
 // ───── Render ─────
@@ -271,7 +314,6 @@ function renderModeSelect() {
         <div id="pinErr"></div>
       </div>
     </div>
-    <p style="text-align:center;color:var(--muted);font-size:.73rem;margin-top:28px"></p>
   </div>`;
 }
 
@@ -315,7 +357,7 @@ function renderParticipant() {
 
   return `<div class="topbar"><span>🙋 참가자</span><button class="btn btn-ghost btn-sm" onclick="mode=null;myName=null;render()">나가기</button></div>
   <div class="wrap" style="max-width:520px">
-    <div class="logo"><h1>🎊 경품추첨</h1></div>
+    <div class="logo"><h1>🌸 벚꽃마라톤 경품추첨</h1></div>
     ${regSection}
     <div class="card">
       <h2>👥 참가자 (${state.people.length}명)</h2>
@@ -357,7 +399,7 @@ function renderAdmin() {
 
   return `<div class="topbar"><span>👑 관리자</span><button class="btn btn-ghost btn-sm" onclick="mode=null;render()">나가기</button></div>
   <div class="wrap">
-    <div class="logo"><h1>🎊 경품추첨 관리자</h1><p>참가자와 경품을 관리하고 추첨을 진행하세요</p></div>
+    <div class="logo"><h1>🌸 벚꽃마라톤 관리자</h1><p>참가자와 경품을 관리하고 추첨을 진행하세요</p></div>
 
     <div class="grid2">
       <div class="card">
