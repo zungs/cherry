@@ -63,13 +63,10 @@ input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(232,87,122,.1)}
 
 .empty{color:var(--muted);font-size:.83rem;font-style:italic;padding:4px 0}
 
-.prize-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:.85rem}
+.prize-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem}
 .prize-row:last-child{border:none}
-.prize-rank{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:900;flex-shrink:0}
-.r1{background:linear-gradient(135deg,#ffd700,#ffaa00);color:#1a1a00}
-.r2{background:linear-gradient(135deg,#c0c0c0,#999);color:#1a1a1a}
-.r3{background:linear-gradient(135deg,#cd7f32,#a06);color:#fff}
-.rn{background:rgba(0,0,0,.06);color:var(--muted)}
+.prize-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);opacity:.3;flex-shrink:0}
+.prize-dot.done{opacity:1;background:#34c759}
 
 /* ───── DRAW ───── */
 .slot{font-family:'Black Han Sans',sans-serif;font-size:clamp(3.5rem,12vw,7rem);text-align:center;
@@ -421,12 +418,11 @@ function renderAdmin() {
           <input type="number" id="prizeQty" placeholder="수량" value="1" min="1" max="99" style="flex:1;min-width:60px;text-align:center">
           <button class="btn btn-primary" onclick="addPrize()">추가</button>
         </div>
-        <div style="max-height:160px;overflow-y:auto">
+        <div style="max-height:260px;overflow-y:auto">
           ${state.prizes.length === 0 ? '<span class="empty">경품을 등록해주세요</span>' :
             state.prizes.map((p, i) => {
-              const rc = i<1?'r1':i<2?'r2':i<3?'r3':'rn';
               return `<div class="prize-row">
-                <span class="prize-rank ${rc}">${i+1}</span>
+                <span class="prize-dot${p.winner?' done':''}"></span>
                 <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.name}</span>
                 ${p.winner ? `<span style="color:var(--accent);font-weight:700;font-size:.78rem">🏆 ${p.winner}</span>` : ''}
                 <span class="x" style="cursor:pointer;color:var(--muted);font-size:.75rem" onclick="removePrize(${i})">✕</span>
@@ -443,7 +439,7 @@ function renderAdmin() {
           ${remaining.length === 0 ? '<option value="">모든 경품 추첨 완료</option>' :
             remaining.map(p => {
               const idx = state.prizes.indexOf(p);
-              return `<option value="${idx}">${idx+1}등: ${p.name}</option>`;
+              return `<option value="${idx}">${p.name}</option>`;
             }).join('')}
         </select>
       </div>
